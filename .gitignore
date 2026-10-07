@@ -1,0 +1,9 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+results/*.pt
+results/*.json
+results/*.png
+.ipynb_checkpoints/
+.DS_Store

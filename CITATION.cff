@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the repository and the biological resources listed in README.md."
+title: "Learning Regulatory DNA Motifs with a 1D CNN"
+type: software
+authors:
+  - family-names: "Quinteros"
+    given-names: "Sofia"
+year: 2026
+license: MIT
