@@ -1,0 +1,95 @@
+# ANALYSE DES RESULTATS
+
+Projet : Learning Regulatory DNA Motifs with a 1D CNN
+
+1. Entraînement
+
+---
+
+Dataset synthétique basé sur le motif REST humain JASPAR MA0138.2.
+
+Paramètres :
+
+* Nombre de séquences : 12 000
+* Longueur des séquences : 200 bp
+* Epochs : 8
+* Batch size : 128
+* Learning rate : 0.001
+* Seed : 42
+* Device : CPU
+
+Architecture :
+
+* Conv1D : 64 filtres, kernel size 21
+* ReLU
+* MaxPooling
+* Conv1D : 128 filtres, kernel size 7
+* ReLU
+* Global Max Pooling
+* Linear layer
+* Sortie : logit
+
+2. Performance
+
+---
+
+ROC-AUC : 0.9995
+Average Precision : 0.9995
+Accuracy : 0.9900
+Precision : 0.9890
+Recall : 0.9912
+F1-score : 0.9901
+
+Le CNN obtient d'excellentes performances sur le benchmark synthétique.
+
+3. Interprétation par in-silico mutagenesis
+
+---
+
+Séquence analysée : 200 bp.
+
+Le motif REST a été inséré à la position 84.
+
+Motif REST utilisé :
+
+TCCAGCACCACGGACAGCTCC
+
+Le motif occupe les positions 84 à 104.
+
+4. Résultats de l'interprétation
+
+---
+
+Le modèle donne pour la séquence de référence :
+
+Reference logit : 24.538935
+Reference probability : 1.000000
+
+Les mutations ayant le plus fort impact sont concentrées dans le motif REST.
+
+Principales mutations :
+
+99 A>G   delta logit = -9.176472
+90 A>T   delta logit = -9.057704
+95 G>T   delta logit = -9.007470
+90 A>C   delta logit = -8.980514
+99 A>T   delta logit = -8.902916
+91 C>T   delta logit = -8.478683
+100 G>T  delta logit = -8.318350
+88 G>T   delta logit = -8.292480
+90 A>G   delta logit = -8.170553
+91 C>A   delta logit = -8.153217
+
+5. Conclusion
+
+---
+
+Le CNN apprend efficacement le signal associé au motif REST dans ce benchmark synthétique.
+
+L'analyse par in-silico mutagenesis montre que les positions ayant le plus fort impact sur la prédiction sont concentrées entre les positions 87 et 100, à l'intérieur du motif REST situé entre les positions 84 et 104.
+
+Cette correspondance indique que le modèle utilise bien une information locale correspondant au motif inséré pour distinguer les séquences positives des séquences négatives.
+
+Cependant, ces résultats doivent être interprétés avec prudence. Le benchmark est synthétique et le motif REST est directement inséré dans les séquences positives. Les performances ne peuvent donc pas être considérées comme représentatives d'une tâche réelle de prédiction de liaison d'un facteur de transcription sur le génome.
+
+L'in-silico mutagenesis mesure la sensibilité du modèle à des mutations et ne constitue pas une preuve de causalité biologique.
